@@ -1,7 +1,6 @@
 // Complete the timeInWords function below.
 function timeInWords(h, m) {
   const numberToWords = {
-    // 0: "o'clock",
     1: 'one',
     2: 'two',
     3: 'three',
