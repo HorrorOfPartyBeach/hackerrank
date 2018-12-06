@@ -3,7 +3,7 @@ let { timeInWords } = require('../timeinwords');
 
 describe('timeInWords()', () => {
   'use strict';
-  it('should return a string in place of numbers', () => {
+  it('should return a string of words instead of numbers', () => {
     expect(timeInWords(3, 10)).to.eql('ten minutes past three');
   });
   it('should return a numerical time as a string of words', () => {
@@ -11,6 +11,8 @@ describe('timeInWords()', () => {
   });
   it('should return a numerical time as a string of words for special case numbers', () => {
     expect(timeInWords(1, 0)).to.eql("one o' clock");
+    expect(timeInWords(2, 1)).to.eql('one minute past two');
+    expect(timeInWords(3, 59)).to.eql('one minute to four');
     expect(timeInWords(7, 15)).to.eql('quarter past seven');
     expect(timeInWords(3, 30)).to.eql('half past three');
   });
