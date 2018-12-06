@@ -1,40 +1,7 @@
 // Complete the timeInWords function below.
 function timeInWords(h, m) {
-  const minuteTime = {
-    0: "o'clock",
-    1: 'one minute',
-    2: 'two minutes',
-    3: 'three minutes',
-    4: 'four minutes',
-    5: 'five minutes',
-    6: 'six minutes',
-    7: 'seven minutes',
-    8: 'eight minutes',
-    9: 'nine minutes',
-    10: 'ten minutes',
-    11: 'eleven minutes',
-    12: 'twelve minutes',
-    13: 'thirteen minutes',
-    14: 'fourteen minutes',
-    15: 'quarter',
-    16: 'sixteen minutes',
-    17: 'seventeen minutes',
-    18: 'eighteen minutes',
-    19: 'nineteen minutes',
-    20: 'twenty minutes',
-    21: 'twenty one minutes',
-    22: 'twenty two minutes',
-    23: 'twenty three minutes',
-    24: 'twenty four minutes',
-    25: 'twenty five minutes',
-    26: 'twenty six minutes',
-    27: 'twenty seven minutes',
-    28: 'twenty eight minutes',
-    29: 'twenty nine minutes',
-    30: 'half'
-  };
-
-  const hourTime = {
+  const numberToWords = {
+    // 0: "o'clock",
     1: 'one',
     2: 'two',
     3: 'three',
@@ -46,19 +13,45 @@ function timeInWords(h, m) {
     9: 'nine',
     10: 'ten',
     11: 'eleven',
-    12: 'twelve'
+    12: 'twelve',
+    13: 'thirteen',
+    14: 'fourteen',
+    15: 'quarter',
+    16: 'sixteen',
+    17: 'seventeen',
+    18: 'eighteen',
+    19: 'nineteen',
+    20: 'twenty',
+    21: 'twenty one',
+    22: 'twenty two',
+    23: 'twenty three',
+    24: 'twenty four',
+    25: 'twenty five',
+    26: 'twenty six',
+    27: 'twenty seven',
+    28: 'twenty eight',
+    29: 'twenty nine',
+    30: 'half'
   };
 
   let startTime = 0;
+  let prefix = '';
+
+  if (m > 30) prefix = 'to';
+  else prefix = 'past';
+
   if (m > 30) startTime = 60 - m;
   else startTime = m;
-  if (m === 0) return `${hourTime[h] + " o' clock"}`;
+
+  if (m === 0) return `${numberToWords[h]} o' clock`;
+  if (m === 1) return `one minute ${prefix} ${numberToWords[h]}`;
+  if (m === 59) return `one minute ${prefix} ${numberToWords[h + 1]}`;
   else {
-    let words = minuteTime[startTime];
-    if (m <= 30) words += ' past ' + hourTime[h];
-    else words += ' to ' + hourTime[h + 1];
-    console.log(words);
-    return `${words}`;
+    let words = numberToWords[startTime];
+    if (m === 15 || m === 30) return `${words} ${prefix} ${numberToWords[h]}`;
+    if (m === 45) return `${words} ${prefix} ${numberToWords[h + 1]}`;
+    if (m < 30) return `${words} minutes ${prefix} ${numberToWords[h]}`;
+    else return `${words} minutes ${prefix} ${numberToWords[h + 1]}`;
   }
 }
 
